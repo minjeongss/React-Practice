@@ -1,30 +1,23 @@
-import React, { useState } from 'react';
+import React, { useReducer} from 'react';
+import personReducer from './reducer/person-reducer';
 
 export default function AppMentors() {
-    const [person,setPerson]=useState(initialPerson);
+    //const [person,setPerson]=useState(initialPerson);
+    const [person,dispatch]=useReducer(personReducer,initialPerson);
+
     const handleUpdate=()=>{
         const target=prompt(`바꿀 사람의 이름은 무엇입니까?`);
-                const current=prompt(`바꾸고자 하는 사람의 이름은 무엇입니까?`);
-                setPerson((prev)=>({...prev,mentors:person.mentors.map((mentor=>{
-                    if (target===mentor.name){
-                        return {...mentor,name:current};
-                    }
-                    return mentor;
-                }))}));
-    };
-    const handleDelete=()=>{
-        const target=prompt(`삭제할 사람의 이름은 무엇입니까?`);
-                setPerson((prev)=>({...prev,
-                    mentors:person.mentors.filter((mentor=>mentor.name!==target
-                ))}));
+        const current=prompt(`바꾸고자 하는 사람의 이름은 무엇입니까?`);
+        dispatch({type:'updated',target,current});
     };
     const handleAdd=()=>{
         const target=prompt(`추가할 사람의 이름은 무엇입니까?`);
-                const title=prompt(`추가할 사람의 직함은 무엇입니까?`);
-                console.log(target,title);
-                setPerson((prev)=>({...prev,
-                    mentors:[...prev.mentors,{target,title}],
-                    }));
+        const title=prompt(`추가할 사람의 직함은 무엇입니까?`);
+        dispatch({type:'added',target,title});
+    };
+    const handleDelete=()=>{
+        const target=prompt(`삭제할 사람의 이름은 무엇입니까?`);
+        dispatch({type:'deleted',target});
     };
     return (
         <div>
@@ -34,9 +27,9 @@ export default function AppMentors() {
             <p>
                 {person.name}의 멘토는 
                 <ul>
-                    {(person.mentors.map((mentor)=>(
-                        <li key={mentor.id}>{mentor.name}</li>
-                    )))}
+                    {person.mentors.map((mentor,index)=>(
+                        <li key={index}>{mentor.name} ({mentor.title})</li>
+                    ))}
                 </ul>
             </p>
             <button onClick={handleUpdate}>멘토 이름 바꾸기</button>
@@ -50,12 +43,10 @@ const initialPerson={
     name:'minjeong',
     title:'developer',
     mentors:[{
-        id:1,
         name:'elly',
         title:'senior developer'
     },{
-        id:2,
         name:'hoho',
         title:'developer'
-    }
-]}
+    },
+],};
