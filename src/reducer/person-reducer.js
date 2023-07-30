@@ -4,23 +4,24 @@ export default function personReducer(person,action){
             const {target,current}=action;
             return {
                 ...person,
-                mentors:person.mentors.map((mentor=>{
+                mentors:person.mentors.map((mentor)=>{
                 if (target===mentor.name){
                     return {...mentor,name:current};
                 }
                 return mentor;
-            }))};
-        }
-        case 'deleted':{
-            return {...person,
-                mentors:person.mentors.filter((mentor)=>mentor.name!==action.name)
-            };
+            })};
         }
         case 'added':{
-            const {target,title}=action;
+            const {name,title}=action;
             return {
                 ...person,
-                mentors:[...person.mentors,{target,title}],
+                mentors:[...person.mentors,{name,title}],
+            };
+        }
+        case 'deleted':{
+            return {
+                ...person,
+                mentors:person.mentors.filter((mentor)=>mentor.name!==action.name),
             };
         }
         default:{
