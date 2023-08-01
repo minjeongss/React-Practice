@@ -12,7 +12,11 @@ import reportWebVitals from './reportWebVitals';
 //import AppForm from './AppForm';
 //import AppWrap from './AppWrap';
 //import AppCard from './AppCard';
-import AppTheme from './AppTheme';
+//import AppTheme from './AppTheme';
+//import AppMentorsButton from './AppMentorsButton';
+//import AppProducts from './basic/AppProducts';
+import AppClass from './AppClass';
+
 
 //실제 리액트 사용의 시작
 //사용자의 입장에서,
@@ -27,7 +31,7 @@ const root = ReactDOM.createRoot(document.getElementById('root')); //root가져�
 //실제 첫 번째 랜더링은 App임
 root.render(
   <React.StrictMode>
-    <AppTheme />
+    <AppClass />
   </React.StrictMode>
 );
 
