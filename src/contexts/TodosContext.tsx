@@ -1,3 +1,4 @@
+import React from "react";
 import { createContext, Dispatch, useReducer, useContext} from "react";
 
 //context definition
@@ -66,6 +67,13 @@ export function TodosContextProvider({children}:{children:React.ReactNode}){
             done:false
         }
     ]);
+    return(
+        <TodosDispatchContext.Provider value={dispatch}>
+            <TodoStateContext.Provider value={todos}>
+                {children}
+            </TodoStateContext.Provider>
+        </TodosDispatchContext.Provider>
+    )
 }
 
 //custom Hooks
