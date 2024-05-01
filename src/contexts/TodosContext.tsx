@@ -13,7 +13,7 @@ const TodoStateContext=createContext<TodosState|undefined>(undefined);
 //action
 //정의: state에 변화가 필요할 때 발생, 하나의 객체로 취급
 //기능
-//  - type: 어떤 동작인지 표기
+//- type: 어떤 동작인지 표기
 type Action=
 {type:'CREATE'; text:string}
 | {type:'TOGGLE'; id:number}
